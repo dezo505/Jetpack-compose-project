@@ -101,12 +101,12 @@ fun Navigation(navController: NavHostController) {
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
-            NavHost(navController = navController, startDestination = Screen.ImageScreen.route) {
+            NavHost(navController = navController, startDestination = Screen.PrimaryScreen.route) {
                 composable(route = Screen.ImageScreen.route) {
                     ImageScreen(navController = navController)
                 }
                 composable(route = Screen.PrimaryScreen.route) {
-                    PrimaryScreen(navController = navController)
+                    PrimaryScreen()
                 }
                 composable(Screen.ListScreen.route) {
                     ListScreen(navController = navController)
