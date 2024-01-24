@@ -103,7 +103,7 @@ fun Navigation(navController: NavHostController) {
         ) {
             NavHost(navController = navController, startDestination = Screen.PrimaryScreen.route) {
                 composable(route = Screen.ImageScreen.route) {
-                    ImageScreen(navController = navController)
+                    ImageScreen()
                 }
                 composable(route = Screen.PrimaryScreen.route) {
                     PrimaryScreen()
