@@ -19,7 +19,7 @@ abstract class AthleteDatabase: RoomDatabase() {
             if (DB_INSTANCE == null) {
                 DB_INSTANCE = databaseBuilder(context.applicationContext,
                     AthleteDatabase::class.java,
-                    "person_database")
+                    "athlete_database")
                     .allowMainThreadQueries()
                     .build()
             }
