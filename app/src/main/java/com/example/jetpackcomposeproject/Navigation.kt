@@ -31,6 +31,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.navArgument
+import com.example.jetpackcomposeproject.screen.CreateScreen
 import com.example.jetpackcomposeproject.screen.DetailsScreen
 import com.example.jetpackcomposeproject.screen.EditScreen
 import com.example.jetpackcomposeproject.screen.ImageScreen
@@ -57,10 +58,14 @@ fun Navigation(navController: NavHostController) {
             TopAppBar(
                 title = {
                     Text(
-                        text = when (currentRoute) {
-                            Screen.ImageScreen.route -> "Image Selection"
-                            Screen.PrimaryScreen.route -> "Home"
-                            Screen.ListScreen.route -> "List"
+                        text = when {
+                            currentRoute == null -> "Unknown Screen"
+                            currentRoute == Screen.ImageScreen.route -> "Image Selection"
+                            currentRoute == Screen.PrimaryScreen.route -> "Home"
+                            currentRoute == Screen.ListScreen.route -> "Athlete list"
+                            currentRoute.startsWith(Screen.DetailsScreen.route) -> "Athlete details"
+                            currentRoute.startsWith(Screen.EditScreen.route) -> "Edit athlete"
+                            currentRoute == Screen.CreateScreen.route -> "Add athlete"
                             else -> "Unknown Screen"
                         },
                         style = MaterialTheme.typography.headlineMedium,
@@ -143,9 +148,9 @@ fun Navigation(navController: NavHostController) {
                     ListScreen(navController = navController)
                 }
                 composable(
-                    route = Screen.DetailsScreen.route,
+                    route = Screen.DetailsScreen.route + "/{athleteId}",
                     arguments = listOf(
-                        navArgument("person_id") {
+                        navArgument("athleteId") {
                             type = NavType.LongType
                             defaultValue = -1
                             nullable = false
@@ -154,13 +159,13 @@ fun Navigation(navController: NavHostController) {
                 ) { entry ->
                     DetailsScreen(
                         navController = navController,
-                        id = entry.arguments?.getLong("person_id")!!
+                        athleteId = entry.arguments?.getLong("athleteId")!!.toInt()
                     )
                 }
                 composable(
-                    route = Screen.EditScreen.route,
+                    route = Screen.EditScreen.route + "/{athleteId}",
                     arguments = listOf(
-                        navArgument("person_id") {
+                        navArgument("athleteId") {
                             type = NavType.LongType
                             defaultValue = -1
                             nullable = false
@@ -169,8 +174,11 @@ fun Navigation(navController: NavHostController) {
                 ) { entry ->
                     EditScreen(
                         navController = navController,
-                        id = entry.arguments?.getLong("person_id")!!
+                        athleteId = entry.arguments?.getLong("athleteId")!!.toInt()
                     )
+                }
+                composable(Screen.CreateScreen.route) {
+                    CreateScreen(navController = navController)
                 }
             }
         }

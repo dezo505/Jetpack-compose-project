@@ -21,5 +21,5 @@ interface AthleteDAO {
     fun update(item: Athlete): Int
 
     @Delete
-    fun delete(item: Athlete)
+    fun delete(item: Athlete): Int
 }

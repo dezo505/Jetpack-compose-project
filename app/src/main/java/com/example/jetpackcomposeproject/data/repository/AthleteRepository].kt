@@ -38,8 +38,8 @@ class AthleteRepository private constructor(context: Context) {
         return athleteDAO.insert(item) >= 0
     }
 
-    fun remove(item: Athlete) {
-        athleteDAO.delete(item)
+    fun remove(item: Athlete): Boolean {
+        return athleteDAO.delete(item) > 0
     }
 
     fun update(item: Athlete): Boolean {

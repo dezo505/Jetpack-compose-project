@@ -1,7 +1,9 @@
 package com.example.jetpackcomposeproject
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -12,30 +14,56 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.jetpackcomposeproject.data.model.Athlete
-import com.example.jetpackcomposeproject.data.model.Sport
-import kotlin.math.roundToInt
+import com.example.jetpackcomposeproject.data.repository.AthleteRepository
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun AthleteItem(athlete: Athlete) {
+fun AthleteItem(athleteId: Int, navController: NavController, onDeleteConfirmed: () -> Unit) {
+
+    val context = LocalContext.current
+
+    val repository = AthleteRepository.getInstance(context)
+
+    val athlete = repository.findById(athleteId)!!
+
+    var showDialog by remember { mutableStateOf(false) }
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp)
-            .background(Color.White),
-        shape = RoundedCornerShape(16.dp)
+            .background(Color.White)
+            .combinedClickable (
+                onClick = {
+                    navController.navigate(Screen.DetailsScreen.withArgs(athlete.id.toString()))
+                },
+                onLongClick = {
+                    showDialog = true
+                }
+            ),
+        shape = RoundedCornerShape(16.dp),
     ) {
         Column(
             modifier = Modifier
@@ -81,23 +109,61 @@ fun AthleteItem(athlete: Athlete) {
                         .size(24.dp)
                         .padding(end = 4.dp)
                 )
-                Text(text = "${athlete.salary.roundToInt()} USD", style = MaterialTheme.typography.bodyMedium)
+                Text(text = "${"%.2f".format(athlete.salary)} USD", style = MaterialTheme.typography.bodyMedium)
             }
         }
     }
-}
 
+    if (showDialog) {
+        DeleteConfirmationDialog(
+            athlete = athlete,
+            onConfirm = {
+                repository.remove(athlete)
+                showDialog = false
+            },
+            onDismiss = {
+                showDialog = false
+            },
+            onDeleteConfirmed = onDeleteConfirmed
+        )
+    }
+}
 
 @Composable
-@Preview
-fun AthleteItemPreview() {
-    val sampleAthlete = Athlete(
-        firstName = "John",
-        lastName = "Doe",
-        phoneNumber = "123-456-7890",
-        email = "john.doe@example.com",
-        salary = 5000.0,
-        sport = Sport.RUNNING
+fun DeleteConfirmationDialog(
+    athlete: Athlete,
+    onConfirm: () -> Unit,
+    onDismiss: () -> Unit,
+    onDeleteConfirmed: () -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = {
+            Text(text = "Confirm Deletion")
+        },
+        text = {
+            Text(text = "Are you sure you want to delete ${athlete.firstName} ${athlete.lastName}?")
+        },
+        confirmButton = {
+            Button(
+                onClick = {
+                    onConfirm()
+                    onDeleteConfirmed()
+                    onDismiss()
+                },
+                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
+            ) {
+                Text(text = "Delete", color = LocalContentColor.current)
+            }
+        },
+        dismissButton = {
+            Button(
+                onClick = onDismiss,
+                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
+            ) {
+                Text(text = "Cancel", color = LocalContentColor.current)
+            }
+        }
     )
-    AthleteItem(athlete = sampleAthlete)
 }
+

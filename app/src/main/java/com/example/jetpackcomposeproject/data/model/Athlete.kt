@@ -97,4 +97,35 @@ class Athlete() {
         result = 31 * result + (sport?.hashCode() ?: 0)
         return result
     }
+
+    fun copy(
+        firstName: String? = this.firstName,
+        lastName: String? = this.lastName,
+        phoneNumber: String? = this.phoneNumber,
+        email: String? = this.email,
+        salary: Double? = this.salary,
+        sport: Sport? = this.sport
+    ): Athlete {
+        val athlete = Athlete(
+            firstName = this.firstName,
+            lastName = this.lastName,
+            phoneNumber = this.phoneNumber,
+            email = this.email,
+            salary = this.salary,
+            sport = this.sport
+        )
+
+        athlete.id = this.id
+
+        if(firstName != null) athlete.firstName = firstName
+        if(lastName != null) athlete.lastName = lastName
+        if(phoneNumber != null) athlete.phoneNumber = phoneNumber
+        if(email != null) athlete.email = email
+        if(salary != null) athlete.salary = salary
+
+        athlete.sport = sport
+
+        return athlete
+    }
+
 }
