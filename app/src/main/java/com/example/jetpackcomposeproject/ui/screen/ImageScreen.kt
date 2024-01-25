@@ -1,4 +1,4 @@
-package com.example.jetpackcomposeproject.screen
+package com.example.jetpackcomposeproject.ui.screen
 
 import android.content.Context
 import android.widget.Toast
@@ -52,9 +52,10 @@ fun ImageScreen() {
                     else -> R.drawable.ic_person_black
                 }),
                 contentDescription = null,
-                contentScale = ContentScale.Crop,
+                contentScale = ContentScale.FillWidth,
                 modifier = Modifier
                     .fillMaxWidth()
+                    .padding(30.dp)
                     .clip(MaterialTheme.shapes.medium)
                     .background(MaterialTheme.colorScheme.background)
             )

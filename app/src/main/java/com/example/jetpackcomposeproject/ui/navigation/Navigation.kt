@@ -1,4 +1,4 @@
-package com.example.jetpackcomposeproject
+package com.example.jetpackcomposeproject.ui.navigation
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -31,12 +31,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.navArgument
-import com.example.jetpackcomposeproject.screen.CreateScreen
-import com.example.jetpackcomposeproject.screen.DetailsScreen
-import com.example.jetpackcomposeproject.screen.EditScreen
-import com.example.jetpackcomposeproject.screen.ImageScreen
-import com.example.jetpackcomposeproject.screen.ListScreen
-import com.example.jetpackcomposeproject.screen.PrimaryScreen
+import com.example.jetpackcomposeproject.ui.screen.CreateScreen
+import com.example.jetpackcomposeproject.ui.screen.DetailsScreen
+import com.example.jetpackcomposeproject.ui.screen.EditScreen
+import com.example.jetpackcomposeproject.ui.screen.ImageScreen
+import com.example.jetpackcomposeproject.ui.screen.ListScreen
+import com.example.jetpackcomposeproject.ui.screen.PrimaryScreen
 
 data class BottomNavigationItem(
     val title: String,

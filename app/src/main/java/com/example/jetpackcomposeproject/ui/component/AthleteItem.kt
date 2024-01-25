@@ -1,4 +1,4 @@
-package com.example.jetpackcomposeproject
+package com.example.jetpackcomposeproject.ui.component
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
@@ -35,6 +35,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.jetpackcomposeproject.R
+import com.example.jetpackcomposeproject.ui.navigation.Screen
 import com.example.jetpackcomposeproject.data.model.Athlete
 import com.example.jetpackcomposeproject.data.repository.AthleteRepository
 

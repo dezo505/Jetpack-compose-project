@@ -1,4 +1,4 @@
-package com.example.jetpackcomposeproject.screen
+package com.example.jetpackcomposeproject.ui.screen
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column
@@ -31,6 +31,8 @@ import androidx.navigation.NavHostController
 import com.example.jetpackcomposeproject.data.model.Athlete
 import com.example.jetpackcomposeproject.data.model.Sport
 import com.example.jetpackcomposeproject.data.repository.AthleteRepository
+import com.example.jetpackcomposeproject.ui.component.SalarySlider
+import com.example.jetpackcomposeproject.ui.component.SportDropdown
 
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterial3Api::class)
 @Composable

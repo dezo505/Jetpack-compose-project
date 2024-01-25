@@ -1,4 +1,4 @@
-package com.example.jetpackcomposeproject.screen
+package com.example.jetpackcomposeproject.ui.screen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -24,8 +24,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.example.jetpackcomposeproject.AthleteItem
-import com.example.jetpackcomposeproject.Screen
+import com.example.jetpackcomposeproject.ui.component.AthleteItem
+import com.example.jetpackcomposeproject.ui.navigation.Screen
 import com.example.jetpackcomposeproject.data.repository.AthleteRepository
 
 @Composable

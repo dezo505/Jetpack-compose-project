@@ -1,4 +1,4 @@
-package com.example.jetpackcomposeproject.screen
+package com.example.jetpackcomposeproject.ui.screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -35,9 +35,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.jetpackcomposeproject.R
-import com.example.jetpackcomposeproject.Screen
-import com.example.jetpackcomposeproject.data.model.Sport
 import com.example.jetpackcomposeproject.data.repository.AthleteRepository
+import com.example.jetpackcomposeproject.ui.navigation.Screen
 
 @Composable
 fun DetailsScreen(athleteId: Int, navController: NavHostController) {
@@ -79,7 +78,7 @@ fun DetailsScreen(athleteId: Int, navController: NavHostController) {
                 .clip(RoundedCornerShape(16.dp))
         ) {
             Image(
-                painter = painterResource(id = getSportImageResId(athlete.sport)),
+                painter = painterResource(id = athlete.sport?.iconResId ?: R.drawable.ic_cross_grey),
                 contentDescription = null,
                 contentScale = ContentScale.Fit,
                 modifier = Modifier.fillMaxSize()
@@ -93,18 +92,6 @@ fun DetailsScreen(athleteId: Int, navController: NavHostController) {
         AthleteDetailRow(Icons.Outlined.Email, "Email", athlete.email ?: "-")
         AthleteDetailRow(Icons.Outlined.DateRange, "Sport", athlete.sport?.fullName ?: "-")
         AthleteDetailRow(Icons.Outlined.Star, "Salary", "${"%.2f".format(athlete.salary)} USD")
-    }
-}
-
-@Composable
-fun getSportImageResId(sport: Sport?): Int {
-    return when (sport) {
-        Sport.FOOTBALL -> R.drawable.ic_football_black
-        Sport.BASKETBALL -> R.drawable.ic_basketball_orange
-        Sport.RUNNING -> R.drawable.ic_running_green
-        Sport.SURFING -> R.drawable.ic_surfing_blue
-        Sport.SWIMMING -> R.drawable.ic_swimming_blue
-        else -> R.drawable.ic_cross_grey
     }
 }
 

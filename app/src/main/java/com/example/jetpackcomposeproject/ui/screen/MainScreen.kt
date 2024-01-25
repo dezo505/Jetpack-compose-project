@@ -1,4 +1,4 @@
-package com.example.jetpackcomposeproject.screen
+package com.example.jetpackcomposeproject.ui.screen
 
 import android.content.Context
 import androidx.compose.foundation.Image

@@ -1,4 +1,4 @@
-package com.example.jetpackcomposeproject
+package com.example.jetpackcomposeproject.ui.navigation
 
 sealed class Screen(val route: String) {
     object PrimaryScreen : Screen("primary_screen")
