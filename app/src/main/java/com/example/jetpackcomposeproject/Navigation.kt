@@ -125,6 +125,8 @@ fun Navigation(navController: NavHostController) {
                             navController.navigate(item.route) {
                                 launchSingleTop = true
                                 restoreState = true
+
+                                popUpTo(Screen.PrimaryScreen.route)
                             }
                         }
                     )
@@ -170,7 +172,7 @@ fun Navigation(navController: NavHostController) {
                             defaultValue = -1
                             nullable = false
                         }
-                    )
+                    ),
                 ) { entry ->
                     EditScreen(
                         navController = navController,
