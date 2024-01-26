@@ -113,7 +113,7 @@ fun CreateScreen(navController: NavHostController) {
             onSportSelected = { athleteSport = it }
         )
 
-        Text("Salary",
+        Text("Income",
             modifier = Modifier
                 .padding(bottom = 8.dp)
                 .align(Alignment.CenterHorizontally))

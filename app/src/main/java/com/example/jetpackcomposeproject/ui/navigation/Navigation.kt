@@ -75,7 +75,7 @@ fun Navigation(navController: NavHostController) {
                 colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = MaterialTheme.colorScheme.primary),
                 navigationIcon = {
                     IconButton(onClick = { navController.navigateUp() }) {
-                        Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = null)
+                        Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = null, tint = Color.White)
                     }
                 }
             )

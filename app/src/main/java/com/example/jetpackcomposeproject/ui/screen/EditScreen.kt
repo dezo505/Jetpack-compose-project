@@ -104,7 +104,7 @@ fun EditScreen(athleteId: Int, navController: NavHostController) {
             onSportSelected = { editedSport = it }
         )
 
-        Text("Salary",
+        Text("Income",
             modifier = Modifier
                 .padding(bottom = 8.dp)
                 .align(Alignment.CenterHorizontally))

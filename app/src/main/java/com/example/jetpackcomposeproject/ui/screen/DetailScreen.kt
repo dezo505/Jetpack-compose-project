@@ -91,7 +91,7 @@ fun DetailsScreen(athleteId: Int, navController: NavHostController) {
         AthleteDetailRow(Icons.Outlined.Phone, "Phone", athlete.phoneNumber ?: "-")
         AthleteDetailRow(Icons.Outlined.Email, "Email", athlete.email ?: "-")
         AthleteDetailRow(Icons.Outlined.DateRange, "Sport", athlete.sport?.fullName ?: "-")
-        AthleteDetailRow(Icons.Outlined.Star, "Salary", "${"%.2f".format(athlete.salary)} USD")
+        AthleteDetailRow(Icons.Outlined.Star, "Income", "${"%.2f".format(athlete.salary)} USD")
     }
 }
 
